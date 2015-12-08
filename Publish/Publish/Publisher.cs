@@ -26,7 +26,7 @@ namespace Publish
             var properties = _channel.CreateBasicProperties();
             properties.SetPersistent(true);
 
-            _channel.BasicPublish(exchange: "", routingKey: que, basicProperties: properties, body: body);
+            _channel.BasicPublish(exchange: "logs", routingKey: "asd.critical", basicProperties: properties, body: body);
         }
     }
 }

@@ -10,21 +10,40 @@ namespace Subscribe
 {
     public abstract class AbstractWorker
     {
-        
+
         protected readonly string _que;
-        private readonly IModel _channel;
+        protected readonly string _key;
+        private static readonly IConnection connection;
+        private static IModel _channel;
+
+        static AbstractWorker()
+        {
+            connection = ChannelFactory.GetInstance();
+            _channel = connection.CreateModel();
+        }
         public AbstractWorker(string que)
         {
-            var factory = new ConnectionFactory() { HostName = "white-mynah-bird.rmq.cloudamqp.com", Password = "uDatVEsNZyk0scl-bflhGrtTsJPZKu6M", UserName = "uDatVEsNZyk0scl-bflhGrtTsJPZKu6M", Uri = "amqp://azasgnqx:uDatVEsNZyk0scl-bflhGrtTsJPZKu6M@white-mynah-bird.rmq.cloudamqp.com/azasgnqx" };
-            var connection = factory.CreateConnection();
-            _channel = connection.CreateModel();
+
             _que = que;
+            _key = que;
+        }
+        public AbstractWorker(string que, string key)
+        {
+
+            _que = que;
+            _key = key;
         }
 
         public void Subcribe()
         {
+            // _channel = connection.CreateModel();
+            _channel.ExchangeDeclare(exchange: "logs", type: "topic");
             _channel.QueueDeclare(queue: _que, durable: true, exclusive: false, autoDelete: false, arguments: null);
-           // channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+
+            _channel.QueueBind(queue: _que,
+                              exchange: "logs",
+                              routingKey: _key
+                              );
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (model, ea) =>
             {

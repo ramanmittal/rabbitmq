@@ -13,13 +13,8 @@ namespace Subscribe
     {
         static void Main(string[] args)
         {
-            new Worker1().Subcribe();
-
             new Worker2().Subcribe();
-            
-
-           
-
+            new Worker1().Subcribe();
         }
     }
 }

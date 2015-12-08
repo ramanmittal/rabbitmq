@@ -15,6 +15,11 @@ namespace Publish
             Publisher.Publish("task_queue1", "task_queue1");
             Publisher.Publish("task_queue1", "task_queue1");
             Publisher.Publish("task_queue2", "task_queue2");
+            Publisher.Publish("task_queue2", "task_queue2");
+            Publisher.Publish("task_queue2", "task_queue2");
+            Publisher.Publish("task_queue2", "task_queue2");
+            Publisher.Publish("task_queue2", "task_queue2");
+            Publisher.Publish("task_queue2", "task_queue2");
             
             
             Console.WriteLine(" Press [enter] to exit.");

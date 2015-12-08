@@ -9,7 +9,7 @@ namespace Subscribe
     public class Worker2 : AbstractWorker
     {
         public Worker2()
-            : base("task_queue2")
+            : base("ghjk")
         {
 
         }
