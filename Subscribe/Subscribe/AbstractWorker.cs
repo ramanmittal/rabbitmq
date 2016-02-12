@@ -18,7 +18,8 @@ namespace Subscribe
 
         static AbstractWorker()
         {
-            connection = ChannelFactory.GetInstance();
+            var factory = new ConnectionFactory() { HostName = "white-mynah-bird.rmq.cloudamqp.com", Password = "uDatVEsNZyk0scl-bflhGrtTsJPZKu6M", UserName = "uDatVEsNZyk0scl-bflhGrtTsJPZKu6M", Uri = "amqp://azasgnqx:uDatVEsNZyk0scl-bflhGrtTsJPZKu6M@white-mynah-bird.rmq.cloudamqp.com/azasgnqx" };
+            connection = factory.CreateConnection();
             _channel = connection.CreateModel();
         }
         public AbstractWorker(string que)

@@ -18,7 +18,7 @@ namespace Subscribe
             var body = ea.Body;
             var message = Encoding.UTF8.GetString(body);
             Console.WriteLine(" worker1 Received {0}", message);
-
+            System.Threading.Thread.Sleep(10000);
             channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
         }
     }

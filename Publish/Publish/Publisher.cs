@@ -18,8 +18,8 @@ namespace Publish
             _channel = connection.CreateModel();
         }
         public static void Publish(string que, string message)
-        {         
-             
+        {
+            _channel.ExchangeDeclare(exchange: "logs", type: "topic");
             _channel.QueueDeclare(queue: que, durable: true, exclusive: false, autoDelete: false, arguments: null);
             var body = Encoding.UTF8.GetBytes(message);
 
